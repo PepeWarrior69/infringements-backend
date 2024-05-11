@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2
+fastapi_sqlalchemy
+pytz
+websockets
+python-dotenv
+pydantic
