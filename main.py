@@ -40,12 +40,23 @@ async def get_incidents(limit: int = 10000, offset: int = 0):
         offset {offset}
     """)
     
+    count_res = await execute_and_fetch_all(f"""
+        select 
+            count(*) as total_count
+        from incident
+    """)
+    
     for r in res:
         r['created_at'] = calendar.timegm(r['created_at'].timetuple())
         r['modified_at'] = calendar.timegm(r['modified_at'].timetuple())
         r['ts'] = calendar.timegm(r['ts'].timetuple())
+        
     
-    return res
+    
+    return {
+        'data': res,
+        'totalCount': count_res[0]['total_count']
+    }
 
 
 class IncidentPayload(BaseModel):
