@@ -51,11 +51,14 @@ async def get_incidents(limit: int = 10000, offset: int = 0):
         r['modified_at'] = calendar.timegm(r['modified_at'].timetuple())
         r['ts'] = calendar.timegm(r['ts'].timetuple())
         
+    count = 0
     
+    if count_res and len(count_res) > 0:
+        count = count_res[0].get('total_count', None)
     
     return {
         'data': res,
-        'totalCount': count_res[0]['total_count']
+        'totalCount': count
     }
 
 
