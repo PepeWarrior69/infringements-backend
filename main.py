@@ -36,6 +36,7 @@ async def get_incidents(limit: int = 10000, offset: int = 0):
         select 
             *
         from incident
+        order by ts desc
         limit {limit}
         offset {offset}
     """)
